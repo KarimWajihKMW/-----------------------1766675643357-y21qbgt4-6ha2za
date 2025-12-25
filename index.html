@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق دردشة صوتية - نظام الوكالات</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-white font-cairo overflow-hidden">
+
+    <!-- Mobile App Container -->
+    <div class="max-w-md mx-auto h-screen bg-gray-900 relative flex flex-col shadow-2xl overflow-hidden border-x border-gray-800">
+        
+        <!-- Top Header (Dynamic) -->
+        <header id="main-header" class="p-4 flex justify-between items-center bg-gray-900/95 backdrop-blur z-20 sticky top-0">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 p-0.5">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full rounded-full bg-gray-800">
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm">أهلاً، أحمد</h1>
+                    <div class="flex items-center gap-1 text-xs text-yellow-400">
+                        <i class="fa-solid fa-gem"></i>
+                        <span>ID: 99281</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 transition">
+                    <i class="fa-regular fa-bell text-gray-400"></i>
+                </button>
+                <button class="px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 text-xs font-bold text-black flex items-center gap-1">
+                    <i class="fa-solid fa-plus"></i> شحن
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Scrollable Area -->
+        <main id="app-content" class="flex-1 overflow-y-auto pb-20 custom-scrollbar">
+            
+            <!-- HOME VIEW -->
+            <div id="view-home" class="view-section p-4 space-y-6">
+                <!-- Banners -->
+                <div class="w-full h-32 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 relative overflow-hidden flex items-center px-6">
+                    <div class="z-10">
+                        <h2 class="text-xl font-bold mb-1">مسابقة الوكالات 🏆</h2>
+                        <p class="text-xs text-indigo-200">كن الأول واربح جوائز قيمة!</p>
+                    </div>
+                    <div class="absolute left-0 bottom-0 opacity-20">
+                        <i class="fa-solid fa-trophy text-8xl"></i>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+                    <button class="px-4 py-2 rounded-full bg-purple-600 text-white text-sm font-bold whitespace-nowrap">الكل</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-800 text-gray-400 text-sm font-bold whitespace-nowrap">مواهب</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-800 text-gray-400 text-sm font-bold whitespace-nowrap">تعارف</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-800 text-gray-400 text-sm font-bold whitespace-nowrap">ألعاب</button>
+                </div>
+
+                <!-- Rooms Grid -->
+                <div>
+                    <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                        <span class="w-1 h-5 bg-pink-500 rounded-full"></span>
+                        الغرف النشطة 🔥
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3" id="rooms-container">
+                        <!-- Room Card Example 1 -->
+                        <div class="bg-gray-800 p-3 rounded-xl cursor-pointer hover:bg-gray-750 transition room-card" onclick="openRoom('room1')">
+                            <div class="relative mb-2">
+                                <img src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="w-full h-28 object-cover rounded-lg">
+                                <div class="absolute top-2 right-2 bg-black/60 backdrop-blur px-2 py-0.5 rounded text-[10px] flex items-center gap-1">
+                                    <i class="fa-solid fa-headphones"></i> 1.2k
+                                </div>
+                                <div class="absolute bottom-[-10px] right-2 w-8 h-8 rounded-full border-2 border-gray-800 overflow-hidden">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sara" class="bg-white">
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h4 class="font-bold text-sm truncate">سهرة طرب 🎵</h4>
+                                <p class="text-xs text-gray-400">المضيف: سارة</p>
+                            </div>
+                        </div>
+                         <!-- Room Card Example 2 -->
+                         <div class="bg-gray-800 p-3 rounded-xl cursor-pointer hover:bg-gray-750 transition room-card" onclick="openRoom('room2')">
+                            <div class="relative mb-2">
+                                <img src="https://images.unsplash.com/photo-1567596388756-f6c61b24bf05?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="w-full h-28 object-cover rounded-lg">
+                                <div class="absolute top-2 right-2 bg-black/60 backdrop-blur px-2 py-0.5 rounded text-[10px] flex items-center gap-1">
+                                    <i class="fa-solid fa-headphones"></i> 540
+                                </div>
+                                <div class="absolute bottom-[-10px] right-2 w-8 h-8 rounded-full border-2 border-gray-800 overflow-hidden">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Omar" class="bg-white">
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h4 class="font-bold text-sm truncate">سوالف وضحك 😂</h4>
+                                <p class="text-xs text-gray-400">المضيف: عمر</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AGENCY VIEW -->
+            <div id="view-agency" class="view-section hidden p-4 space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="inline-block p-3 rounded-full bg-blue-500/20 text-blue-400 mb-2">
+                        <i class="fa-solid fa-briefcase text-3xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">مركز الوكالة</h2>
+                    <p class="text-gray-400 text-sm">إدارة المضيفين والارباح ونظام BD</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-gray-800 p-4 rounded-xl border border-gray-700">
+                        <p class="text-xs text-gray-400 mb-1">الدخل الحالي</p>
+                        <h3 class="text-xl font-bold text-yellow-400">$4,200</h3>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-xl border border-gray-700">
+                        <p class="text-xs text-gray-400 mb-1">عدد المضيفين</p>
+                        <h3 class="text-xl font-bold text-white">24</h3>
+                    </div>
+                </div>
+
+                <!-- BD System Badge -->
+                <div class="bg-gradient-to-r from-gray-800 to-gray-700 p-4 rounded-xl flex items-center justify-between border-r-4 border-yellow-500">
+                    <div>
+                        <h3 class="font-bold text-white">مدير التطوير (BD)</h3>
+                        <p class="text-xs text-gray-400">مستوى التواصل: <span class="text-green-400">نشط</span></p>
+                    </div>
+                    <button class="px-3 py-1.5 bg-yellow-500 text-black text-xs font-bold rounded-lg">تواصل</button>
+                </div>
+
+                <!-- Agency Menu -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden">
+                    <div class="p-4 border-b border-gray-700 flex justify-between items-center cursor-pointer hover:bg-gray-750">
+                        <span class="flex items-center gap-3">
+                            <i class="fa-solid fa-users text-blue-400"></i> قائمة المضيفين
+                        </span>
+                        <i class="fa-solid fa-chevron-left text-xs text-gray-500"></i>
+                    </div>
+                    <div class="p-4 border-b border-gray-700 flex justify-between items-center cursor-pointer hover:bg-gray-750">
+                        <span class="flex items-center gap-3">
+                            <i class="fa-solid fa-chart-pie text-green-400"></i> تقارير البيانات
+                        </span>
+                        <i class="fa-solid fa-chevron-left text-xs text-gray-500"></i>
+                    </div>
+                    <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-gray-750">
+                        <span class="flex items-center gap-3">
+                            <i class="fa-solid fa-gear text-gray-400"></i> إعدادات الوكالة
+                        </span>
+                        <i class="fa-solid fa-chevron-left text-xs text-gray-500"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFILE VIEW -->
+            <div id="view-profile" class="view-section hidden p-4">
+                <div class="flex flex-col items-center mb-6">
+                    <div class="w-24 h-24 rounded-full border-4 border-purple-500 p-1 mb-3 relative">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full rounded-full bg-gray-700">
+                        <div class="absolute bottom-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-0.5 rounded-full border border-gray-900">Lv.42</div>
+                    </div>
+                    <h2 class="text-xl font-bold">أحمد محمد</h2>
+                    <p class="text-gray-400 text-sm">ID: 99281 <i class="fa-regular fa-copy cursor-pointer ml-1"></i></p>
+                </div>
+
+                <div class="flex justify-center gap-8 mb-8 text-center">
+                    <div>
+                        <h4 class="font-bold text-lg">125</h4>
+                        <p class="text-xs text-gray-500">متابعين</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg">45</h4>
+                        <p class="text-xs text-gray-500">يتابع</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg">12k</h4>
+                        <p class="text-xs text-gray-500">إعجابات</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 rounded-xl p-1 mb-4">
+                   <div class="grid grid-cols-3 gap-1">
+                       <div class="text-center p-3 hover:bg-gray-700 rounded-lg">
+                           <i class="fa-solid fa-wallet text-xl text-green-400 mb-1"></i>
+                           <p class="text-xs">محفظتي</p>
+                       </div>
+                       <div class="text-center p-3 hover:bg-gray-700 rounded-lg">
+                           <i class="fa-solid fa-medal text-xl text-yellow-400 mb-1"></i>
+                           <p class="text-xs">الأوسمة</p>
+                       </div>
+                       <div class="text-center p-3 hover:bg-gray-700 rounded-lg">
+                           <i class="fa-solid fa-store text-xl text-pink-400 mb-1"></i>
+                           <p class="text-xs">المتجر</p>
+                       </div>
+                   </div>
+                </div>
+
+                <div class="space-y-2">
+                    <button class="w-full bg-gray-800 p-4 rounded-xl flex justify-between items-center">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-shield-halved text-gray-400"></i> مركز الحماية</span>
+                        <i class="fa-solid fa-chevron-left text-xs text-gray-600"></i>
+                    </button>
+                    <button class="w-full bg-gray-800 p-4 rounded-xl flex justify-between items-center">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-headset text-gray-400"></i> الدعم الفني</span>
+                        <i class="fa-solid fa-chevron-left text-xs text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav id="bottom-nav" class="bg-gray-900 border-t border-gray-800 h-16 flex justify-around items-center px-2 z-20">
+            <button onclick="switchTab('home')" class="nav-btn active flex flex-col items-center gap-1 text-purple-500 w-16">
+                <i class="fa-solid fa-house text-xl"></i>
+                <span class="text-[10px]">الرئيسية</span>
+            </button>
+            <button onclick="switchTab('agency')" class="nav-btn flex flex-col items-center gap-1 text-gray-500 w-16">
+                <i class="fa-solid fa-briefcase text-xl"></i>
+                <span class="text-[10px]">الوكالة</span>
+            </button>
+            <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center -mt-6 border-4 border-gray-900 shadow-lg cursor-pointer hover:scale-105 transition">
+                 <i class="fa-solid fa-microphone text-white text-xl"></i>
+            </div>
+            <button onclick="switchTab('messages')" class="nav-btn flex flex-col items-center gap-1 text-gray-500 w-16">
+                <i class="fa-regular fa-comment text-xl"></i>
+                <span class="text-[10px]">الرسائل</span>
+            </button>
+            <button onclick="switchTab('profile')" class="nav-btn flex flex-col items-center gap-1 text-gray-500 w-16">
+                <i class="fa-regular fa-user text-xl"></i>
+                <span class="text-[10px]">ملفي</span>
+            </button>
+        </nav>
+
+        <!-- ROOM OVERLAY (Full Screen Modal) -->
+        <div id="room-overlay" class="fixed inset-0 bg-gray-900 z-50 flex flex-col hidden transform transition-transform duration-300 translate-y-full">
+            <!-- Room Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-30">
+                <div class="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-gray-900/80 to-gray-900"></div>
+            </div>
+
+            <!-- Room Header -->
+            <div class="relative z-10 p-4 flex justify-between items-start">
+                <div class="flex items-center gap-2 bg-black/30 backdrop-blur rounded-full p-1 pr-4">
+                    <div class="text-white">
+                        <h3 class="text-xs font-bold">سهرة طرب 🎵</h3>
+                        <p class="text-[10px] text-gray-300">ID: 10024</p>
+                    </div>
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sara" class="w-8 h-8 rounded-full border border-white">
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="closeRoom()" class="w-8 h-8 rounded-full bg-black/30 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-power-off text-red-400"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Seats Grid -->
+            <div class="relative z-10 flex-1 flex flex-col justify-center px-4">
+                <!-- Host Seat -->
+                <div class="flex justify-center mb-8">
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-20 h-20 rounded-full border-2 border-yellow-400 p-0.5 relative animate-pulse-ring">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sara" class="w-full h-full rounded-full bg-gray-800">
+                            <div class="absolute -bottom-2 bg-yellow-400 text-black text-[10px] font-bold px-2 rounded-full">HOST</div>
+                            <div class="absolute top-0 right-0 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-[8px] border border-gray-900">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold">سارة</span>
+                    </div>
+                </div>
+
+                <!-- Guest Seats -->
+                <div class="grid grid-cols-4 gap-4">
+                    <!-- Seat 1 -->
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-14 h-14 rounded-full bg-black/40 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10">
+                            <i class="fa-solid fa-plus text-gray-500"></i>
+                        </div>
+                        <span class="text-xs text-gray-400">1</span>
+                    </div>
+                    <!-- Seat 2 (Occupied) -->
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-14 h-14 rounded-full p-0.5 relative">
+                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Omar" class="w-full h-full rounded-full bg-gray-800">
+                             <div class="absolute bottom-0 right-0 w-4 h-4 bg-gray-500 rounded-full flex items-center justify-center text-[8px] border border-gray-900">
+                                <i class="fa-solid fa-microphone-slash"></i>
+                            </div>
+                        </div>
+                        <span class="text-xs text-white">عمر</span>
+                    </div>
+                    <!-- Seat 3 -->
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-14 h-14 rounded-full bg-black/40 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10">
+                            <i class="fa-solid fa-plus text-gray-500"></i>
+                        </div>
+                        <span class="text-xs text-gray-400">3</span>
+                    </div>
+                     <!-- Seat 4 -->
+                     <div class="flex flex-col items-center gap-1">
+                        <div class="w-14 h-14 rounded-full bg-black/40 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10">
+                            <i class="fa-solid fa-plus text-gray-500"></i>
+                        </div>
+                        <span class="text-xs text-gray-400">4</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="relative z-10 h-48 px-4 mb-4 overflow-hidden">
+                <div id="chat-log" class="h-full overflow-y-auto space-y-2 text-sm mask-image-linear-gradient">
+                    <div class="bg-black/40 backdrop-blur w-fit px-3 py-1 rounded-full text-yellow-300 text-xs">
+                        <span class="font-bold text-white">System:</span> مرحباً بكم في غرفة سارة
+                    </div>
+                    <div class="bg-black/40 backdrop-blur w-fit px-3 py-1 rounded-full text-white text-xs">
+                        <span class="font-bold text-blue-300">عمر:</span> الصوت واضح يا جماعة؟
+                    </div>
+                    <div class="bg-black/40 backdrop-blur w-fit px-3 py-1 rounded-full text-white text-xs">
+                         <span class="font-bold text-pink-300">سارة:</span> أهلاً عمر، نورت الروم!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room Footer -->
+            <div class="relative z-10 p-3 bg-gray-900/80 backdrop-blur border-t border-white/5 flex gap-3 items-center">
+                <button class="p-2.5 rounded-full bg-gray-800 text-white hover:bg-gray-700">
+                    <i class="fa-regular fa-comment-dots"></i>
+                </button>
+                <button class="p-2.5 rounded-full bg-gray-800 text-white hover:bg-gray-700">
+                    <i class="fa-solid fa-microphone-slash"></i>
+                </button>
+                 <div class="flex-1"></div>
+                 <button onclick="alert('إرسال هدية!')" class="p-1 pr-3 pl-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white flex items-center gap-2 shadow-lg animate-bounce-slow">
+                    <span class="text-xs font-bold">هدايا</span>
+                    <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
